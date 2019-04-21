@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
+import SingleTodo from './SingleTodo';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       todo: [],
-      todoText: ""
+      todoText: "",
+      isEditable: false
     }
   }
 
@@ -41,7 +43,7 @@ class App extends Component {
   render() {
     let myTodos = this.state.todo.map((e, i) => {
       return(
-        <li className="list-group-item" key={i}>{e}</li>
+        <SingleTodo todo={e} />
       );
     });
 

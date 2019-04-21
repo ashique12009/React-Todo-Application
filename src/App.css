@@ -39,3 +39,17 @@
 .clist{
   text-align: left;
 }
+.action{
+  text-align: right;
+}
+.crow p{
+  margin-bottom: 0;
+}
+.crow i{
+  cursor: pointer;
+  font-size: 21px;
+}
+.crow i.fa-times{
+  color: red;
+  margin-left: 15px;
+}
