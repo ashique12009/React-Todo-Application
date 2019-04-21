@@ -31,3 +31,11 @@
     transform: rotate(360deg);
   }
 }
+
+/*custom css*/
+.mt-10{
+  margin-top: 10px;
+}
+.clist{
+  text-align: left;
+}
