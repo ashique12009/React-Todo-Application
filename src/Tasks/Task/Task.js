@@ -5,13 +5,25 @@ class Task extends Component {
         isEditable: false
     }
 
+    changeKeyHandler = (e) => {
+        if ( e.key === 'Enter' ) {
+            this.setState({
+                isEditable: false
+            });
+        }
+    }
+
     render() {
         return(
             <li className="list-group-item">
                 <div className="row crow">
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 lcol">
                     { this.state.isEditable ? 
-                        <input type="text" placeholder="Enter Todo" value={this.props.title} />
+                        <input type="text" 
+                        onChange={e => this.props.updateHandler(e.target.value, this.props.id)} 
+                        onKeyPress={this.changeKeyHandler}
+                        placeholder="Enter Todo" 
+                        value={this.props.title} />
                         : <p>{this.props.id}<span>{this.props.title}</span><span>{this.props.status}</span></p>
                     }
                     </div>

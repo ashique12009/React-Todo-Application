@@ -52,6 +52,23 @@ class App extends Component {
     }
   }
 
+  updateHandler = (title, id) => {
+    let todoCopy = this.state.todo.map(task => {
+      if ( id === task.id ) {
+        return {
+          id: id,
+          title: title,
+          status: false
+        }
+      }
+      return task;
+    });
+
+    this.setState({
+      todo: todoCopy
+    });
+  }
+
   deleteTodo = (id) => {
     let todoCopy = this.state.todo.filter(todo => todo.id !== id)
     this.setState({
@@ -71,7 +88,10 @@ class App extends Component {
             </div>
             <button className="btn btn-primary" onClick={ this.addTodo }>Add Todo</button>
 
-            <Tasks tasks={this.state.todo} deleteHandler={this.deleteTodo.bind(this)} />
+            <Tasks 
+            tasks={this.state.todo} 
+            updateHandler={this.updateHandler.bind(this)}
+            deleteHandler={this.deleteTodo.bind(this)} />
 
         </div>
       </div>

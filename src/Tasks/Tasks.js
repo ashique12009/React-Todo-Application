@@ -11,7 +11,8 @@ class Tasks extends Component {
                                 id={task.id} 
                                 title={task.title} 
                                 state={task.status}
-                                deleteHandler={this.props.deleteHandler} />
+                                deleteHandler={this.props.deleteHandler}
+                                updateHandler={this.props.updateHandler} />
                     )
                 }) }
             </div>
