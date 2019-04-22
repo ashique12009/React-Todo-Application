@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-class SingleTodo extends Component {
-
+class Task extends Component {
     state = {
         isEditable: false
     }
@@ -12,19 +11,19 @@ class SingleTodo extends Component {
                 <div className="row crow">
                     <div className="col-sm-6">
                     { this.state.isEditable ? 
-                        <input type="text" placeholder="Enter Todo" value={this.props.todo} />
-                        : <p>{this.props.todo}</p> }
+                        <input type="text" placeholder="Enter Todo" value={this.props.title} />
+                        : <p>{this.props.id}<span>{this.props.title}</span><span>{this.props.status}</span></p>
+                    }
                     </div>
                     <div className="col-sm-6">
                     <div className="action">
-                        <i className="fa fa-edit" onClick={ () => this.setState({ isEditable: true })}></i>
-                        <i className="fa fa-times"></i>
+                        <i className="fa fa-edit" onClick={() => this.setState({ isEditable: true })}></i>
+                        <i className="fa fa-times" onClick={ () => this.props.deleteHandler(this.props.id) }></i>
                     </div>
                     </div>
                 </div>
             </li>
-        );
+        )
     }
 }
-
-export default SingleTodo;
+export default Task;

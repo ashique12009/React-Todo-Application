@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import SingleTodo from './SingleTodo';
+import Tasks from './Tasks/Tasks';
 
 class App extends Component {
   constructor() {
@@ -12,13 +12,19 @@ class App extends Component {
     }
   }
 
-  onInputChange = e => {
+  onInputChange = (e) => {
     this.setState({ todoText: e.target.value });
   }
 
   addTodo = () => {
     let todoCopy = this.state.todo.slice();
-    todoCopy.push(this.state.todoText);
+    todoCopy.push(
+      { 
+        title: this.state.todoText,
+        status: false,
+        id: this.state.todo.length + 1
+      }
+    );
     if ( this.state.todoText !== '' ) {
       this.setState({
         todo: todoCopy,
@@ -30,7 +36,13 @@ class App extends Component {
   enterKeyPressHandler = (e) => {
     if ( e.key === 'Enter' ) {
       let todoCopy = this.state.todo.slice();
-      todoCopy.push(this.state.todoText);
+      todoCopy.push(
+        { 
+          title: this.state.todoText,
+          status: false,
+          id: this.state.todo.length + 1
+        }
+      );
       if ( this.state.todoText !== '' ) {
         this.setState({
           todo: todoCopy,
@@ -40,12 +52,14 @@ class App extends Component {
     }
   }
 
-  render() {
-    let myTodos = this.state.todo.map((e, i) => {
-      return(
-        <SingleTodo todo={e} />
-      );
+  deleteTodo = (id) => {
+    let todoCopy = this.state.todo.filter(todo => todo.id !== id)
+    this.setState({
+      todo: todoCopy
     });
+  }
+
+  render() {
 
     return (
       <div className="App">
@@ -56,7 +70,9 @@ class App extends Component {
               <input type="text" onKeyPress={ this.enterKeyPressHandler } onChange={ this.onInputChange } value={ this.state.todoText } className="form-control" placeholder="Enter Todo" />
             </div>
             <button className="btn btn-primary" onClick={ this.addTodo }>Add Todo</button>
-            { ( this.state.todo.length === 0 ) ? <h2>No Todos Found!</h2> : <ul className="clist list-group mt-10">{ myTodos }</ul> }
+
+            <Tasks tasks={this.state.todo} deleteHandler={this.deleteTodo.bind(this)} />
+
         </div>
       </div>
     );
